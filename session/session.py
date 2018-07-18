@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 sesh = ""
-class Mysession:
+class Session:
     """My custom cog for A.S.S"""
 
     def __init__(self, bot):
@@ -15,4 +15,4 @@ class Mysession:
 
 
 def setup(bot):
-    bot.add_cog(Mysession(bot))
+    bot.add_cog(Session(bot))
