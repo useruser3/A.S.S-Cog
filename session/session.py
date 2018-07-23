@@ -3,9 +3,15 @@ channelid = 434434257348198400
 class Session:
     """My custom cog"""
 
-    @commands.command(pass_context=True)
+    @commands.group(pass_context=True)
     async def session(self,ctx):
         """get context"""
-        server = ctx.message.guild
-        await ctx.send(server.get_channel(channelid).topic)
+        if ctx.invoked_subcommand is None:
+            server = ctx.message.guild
+            await ctx.send(server.get_channel(channelid).topic)
 
+    @session.command(name="set", pass_context=True)
+    async def set_session(self,ctx):
+        server = ctx.message.guild
+        await ctx.send("hello world")
+        
