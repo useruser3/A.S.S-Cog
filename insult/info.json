@@ -1,0 +1,12 @@
+{
+    "AUTHOR" : "Useruser3",
+    "DESCRIPTION" : "port of insult",
+    "INSTALL_MSG" : "Thanks for adding my cog ;)",
+    "NAME" : "Insult",
+    "REQUIREMENTS" : [],
+    "SHORT" : "insults users",
+    "TAGS" : [
+        "fun",
+        "lol"
+    ]
+}
