@@ -11,7 +11,8 @@ class Session:
             await ctx.send(server.get_channel(channelid).topic)
 
     @session.command(name="set", pass_context=True)
-    async def set_session(self,ctx):
+    async def set_session(self,ctx,*,text):
         server = ctx.message.guild
-        await ctx.send("hello world")
+        channel= server.get_channel(237474498687926272)
+        await channel.edit(topic = text)
         
