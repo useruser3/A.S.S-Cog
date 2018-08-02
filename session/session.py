@@ -19,7 +19,8 @@ class Session:
     async def session(self,ctx):
         """type ```session``` followed by team to see the current session. leave team blank to see a general session"""
         if ctx.invoked_subcommand is None:
-            await ctx.send("The current session is " + "```" + await self.config.sessions.main() + "```")
+            await ctx.send("The current sessions are: " + "\n")
+            await ctx.send("```" + "MAIN: " + await self.config.sessions.main() + "\n" +  "RED: " + await self.config.sessions.red() +"\n" + "GREEN: " + await self.config.sessions.green() + "\n" + "AMBER: " + await self.config.sessions.amber() + "```")
 
     @session.command(name="set", pass_context=True)
     async def set_session(self,ctx,stype,*,text):
