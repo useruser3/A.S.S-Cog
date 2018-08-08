@@ -19,9 +19,7 @@ class Session:
     async def session(self,ctx):
         """type ```session``` followed by team to see the current session. leave team blank to see a general session"""
         if ctx.invoked_subcommand is None:
-            await ctx.send("The current sessions are: " + "\n")
-            await ctx.send("```" + "MAIN: " + await self.config.sessions.main() + "\n" +  "RED: " + await self.config.sessions.red() +"\n" + "GREEN: " + await self.config.sessions.green() + "\n" + "AMBER: " + await self.config.sessions.amber() + "```")
-
+            await ctx.send("The current main session is " + "```" + await self.config.sessions.main() + "```")
     @session.command(name="set", pass_context=True)
     async def set_session(self,ctx,stype,*,text):
         """Type set and the team you want to update followed by the new session ID (stype is the name of the team colour and text is the session ID)""" 
@@ -40,6 +38,13 @@ class Session:
         else:
             await ctx.send("invalid team")
 
+
+    @session.command(name="list", pass_context=True)
+    async def list(self,ctx):
+        await ctx.send("The current sessions are: " + "\n")
+        await ctx.send("```" + "MAIN: " + await self.config.sessions.main() + "\n" +  "RED: " + await self.config.sessions.red() +"\n" + "GREEN: " + await self.config.sessions.green() + "\n" + "AMBER: " + await self.config.sessions.amber() + "```")
+
+
     @session.command(name="red", pass_context=True)
     async def sred(self,ctx):
         """tells you the session for red"""
@@ -54,12 +59,3 @@ class Session:
     async def samb(self,ctx):
         """tells you the session for amber"""
         await ctx.send("The current session for amber is " + "```" + await self.config.sessions.amber() + "```")
-
-
-
-
-
-
-
-
-
