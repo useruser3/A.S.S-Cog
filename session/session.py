@@ -15,7 +15,8 @@ class Session:
         default_user = {
             "info": {
                 "name": "none",
-                "hr": "0"        
+                "hr": "0",
+                "lastupdate": 0      
             }
         }
         self.config.register_global(**default_global)
@@ -69,9 +70,9 @@ class Session:
 
     @commands.group()
     async def user(self,ctx):
-       if ctx.invoked_subcommand is None:
-        await ctx.send("```" + "User Info:" + "\n\n" + "NAME: " + await self.config.user(ctx.author).info.name() + "\n" + "HR: " + await self.config.user(ctx.author).info.hr() + "```")
-
+        duser = await self.config.user(ctx.author).info.lastupdate()
+        if ctx.invoked_subcommand is None:
+                await ctx.send("```" + "User Info:" + "\n\n" + "NAME: " + await self.config.user(ctx.author).info.name() + "\n" + "HR: " + await self.config.user(ctx.author).info.hr() + "\n" + "LAST UPDATED BY: " + str(duser) + "```")
     @user.command(name="info", pass_context=True)
     async def list(self,ctx):
         await ctx.send(await self.config.user(ctx.author).info.name())
@@ -80,11 +81,16 @@ class Session:
     async def set(self,ctx,stype,*,text):
         if stype == "name":
              await self.config.user(ctx.author).info.name.set(text)
+             await self.config.user(ctx.author).info.lastupdate.set(ctx.author.id)
              await ctx.send("User details updated")
-        elif stype == "hr":
-            await self.config.user(ctx.author).info.hr.set(text)
-            await ctx.send("User details updated")
-        else:
-            await ctx.send("error")
-
-
+        if stype == "hr":
+            try: 
+                if int(text) > 999 or int(text) < 0:
+                    await ctx.send("Error: Please select a value lower than 1000 and greater than -1 :smile:")
+                    return
+            except:
+                await ctx.send("Error: HR must be a number :smile:")
+            else:
+                    await self.config.user(ctx.author).info.hr.set(text)
+                    await self.config.user(ctx.author).info.lastupdate.set(ctx.author.id)
+                    await ctx.send("User details updated")
