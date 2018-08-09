@@ -12,10 +12,17 @@ class Session:
                 "amber": "There is no session set. Please set one using session set followed by the session ID"         
             }
         }
+        default_user = {
+            "info": {
+                "name": "none",
+                "hr": "0"        
+            }
+        }
         self.config.register_global(**default_global)
+        self.config.register_user(**default_user)
         #end config
 
-    @commands.group(pass_context=True)
+    @commands.group(invoke_without_subcommand=True)
     async def session(self,ctx):
         """type ```session``` followed by team to see the current session. leave team blank to see a general session"""
         if ctx.invoked_subcommand is None:
@@ -59,3 +66,25 @@ class Session:
     async def samb(self,ctx):
         """tells you the session for amber"""
         await ctx.send("The current session for amber is " + "```" + await self.config.sessions.amber() + "```")
+
+    @commands.group()
+    async def user(self,ctx):
+       if ctx.invoked_subcommand is None:
+        await ctx.send("```" + "User Info:" + "\n\n" + "NAME: " + await self.config.user(ctx.author).info.name() + "\n" + "HR: " + await self.config.user(ctx.author).info.hr() + "```")
+
+    @user.command(name="info", pass_context=True)
+    async def list(self,ctx):
+        await ctx.send(await self.config.user(ctx.author).info.name())
+
+    @user.command(name="set")
+    async def set(self,ctx,stype,*,text):
+        if stype == "name":
+             await self.config.user(ctx.author).info.name.set(text)
+             await ctx.send("User details updated")
+        elif stype == "hr":
+            await self.config.user(ctx.author).info.hr.set(text)
+            await ctx.send("User details updated")
+        else:
+            await ctx.send("error")
+
+
