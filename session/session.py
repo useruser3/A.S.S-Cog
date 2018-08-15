@@ -35,7 +35,7 @@ class Session:
     async def session(self,ctx):
         """type ```session``` followed by team to see the current session. leave team blank to see a general session"""
         if ctx.invoked_subcommand is None:
-            await ctx.send("The current main session is " + "```" + await self.config.sessions.apex1() + "```")
+            await ctx.send("The current main session is " + "```" + await self.config.sessions.apex() + "```")
 
     @session.command(name="set")
     async def set_session(self,ctx,stype,*,text):
