@@ -1,6 +1,7 @@
 from redbot.core import commands
 from redbot.core import Config
 import discord
+acechannel = 474639017422356491
 class Session:
     def __init__(self):
         #start config section
@@ -30,13 +31,13 @@ class Session:
 
 
     #session commands
-    @commands.group(invoke_without_subcommand=True, autohelp=False)
+    @commands.group(autohelp=False)
     async def session(self,ctx):
         """type ```session``` followed by team to see the current session. leave team blank to see a general session"""
         if ctx.invoked_subcommand is None:
             await ctx.send("The current main session is " + "```" + await self.config.sessions.apex1() + "```")
 
-    @session.command(name="set", pass_context=True)
+    @session.command(name="set")
     async def set_session(self,ctx,stype,*,text):
         """Type set and the team you want to update followed by the new session ID (stype is the name of the team colour and text is the session ID)""" 
         if stype == "apex":
@@ -54,58 +55,63 @@ class Session:
         elif stype == "apex5":
             await ctx.send("```" + "The session ID for " + stype + " is now:" + " " + text + "```")
             await self.config.sessions.apex5.set(text)
-        elif stype == "ace":
-            #await ctx.send("```" + "The session ID for " + stype + " is now:" + " " + text + "```")
-            #await self.config.sessions.ace.set(text)
+        elif stype == "ace" and ctx.channel.id == acechannel:
+            await ctx.send("```" + "The session ID for " + stype + " is now:" + " " + text + "```")
+            await self.config.sessions.ace.set(text)
             await ctx.send("need to do ace check code :smile:")
         else:
             await ctx.send("invalid team")
 
 
-    @session.command(name="list", pass_context=True)
-    async def list(self,ctx):
-        await ctx.send("hello")
+    @session.command(name="list")
+    async def slist(self,ctx):
+        embed=discord.Embed(title='Session List')
+        embed.add_field(name='APEX: ', value=await self.config.sessions.apex(), inline=False)
+        embed.add_field(name='APEX2: ', value=await self.config.sessions.apex2(), inline=False)
+        embed.add_field(name='APEX3: ', value=await self.config.sessions.apex3(), inline=False)
+        embed.add_field(name='APEX4: ', value=await self.config.sessions.apex4(), inline=False)
+        embed.add_field(name='APEX5: ', value=await self.config.sessions.apex5(), inline=False)
+        if ctx.channel.id == acechannel:
+                embed.add_field(name='ACE: ', value=await self.config.sessions.ace(), inline=False)
+        await ctx.send(embed=embed)
 
-    @session.command(name="main", pass_context=True)
-    async def sred(self,ctx):
+    @session.command(name="main")
+    async def sapx(self,ctx):
         """tells you the session for apex"""
         await ctx.send("The current session for apex is " + "```" + await self.config.sessions.apex() + "```")
 
-    @session.command(name="apex2", pass_context=True)
-    async def sred(self,ctx):
+    @session.command(name="apex2")
+    async def sapx2(self,ctx):
         """tells you the session for apex2"""
         await ctx.send("The current session for apex2 is " + "```" + await self.config.sessions.apex2() + "```")
 
-    @session.command(name="apex3", pass_context=True)
-    async def sgre(self,ctx):
+    @session.command(name="apex3")
+    async def sapx3(self,ctx):
         """tells you the session for apex3"""
         await ctx.send("The current session for apex3 is " + "```" + await self.config.sessions.apex3() + "```")
 
-    @session.command(name="apex4", pass_context=True)
-    async def samb(self,ctx):
+    @session.command(name="apex4")
+    async def sapx4(self,ctx):
         """tells you the session for apex4"""
         await ctx.send("The current session for apex4 is " + "```" + await self.config.sessions.apex4() + "```")
 
-    @session.command(name="apex5", pass_context=True)
-    async def samb(self,ctx):
+    @session.command(name="apex5")
+    async def sapx5(self,ctx):
         """tells you the session for apex5"""
         await ctx.send("The current session for apex5 is " + "```" + await self.config.sessions.apex5() + "```")
 
-    @session.command(name="ace", pass_context=True)
-    async def samb(self,ctx):
+    @session.command(name="ace")
+    async def sace(self,ctx):
         """tells you the session for ace"""
 
-        #ace check
-        #if channel is ace
-
-        #await ctx.send("The current session for ace is " + "```" + await self.config.sessions.ace() + "```")
-        #else
-        #return
-        await ctx.send("need to do ace check code :smile:")
+        if ctx.channel.id == acechannel:
+            await ctx.send("The current session for ace is " + "```" + await self.config.sessions.ace() + "```")
+        else:
+            return
 
 
 #user commands(guildcard)
-    @commands.group()
+    @commands.group(autohelp=False)
     async def user(self,ctx):
         duser = await self.config.user(ctx.author).info.lastupdate() 
         if ctx.invoked_subcommand is None:
@@ -115,8 +121,8 @@ class Session:
             embed.add_field(name='LAST UPDATED BY: ', value=await self.config.user(ctx.author).info.lastupdate(), inline=True)
             await ctx.send(embed=embed)
     
-    @user.command(name="info", pass_context=True)
-    async def list(self,ctx):
+    @user.command(name="info")
+    async def ulist(self,ctx):
         await ctx.send(await self.config.user(ctx.author).info.name())
 
     @user.command(name="set")
