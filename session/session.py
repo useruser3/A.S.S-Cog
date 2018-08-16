@@ -119,6 +119,7 @@ class Session:
             embed=discord.Embed(title='User Details')
             embed.add_field(name='Name: ', value=await self.config.user(ctx.author).info.name(), inline=False)
             embed.add_field(name='HR: ', value=await self.config.user(ctx.author).info.hr(), inline=False)
+            embed.add_field(name='WEAPON: ', value=await self.config.user(ctx.author).info.weapon(), inline=False)
             embed.add_field(name='LAST UPDATED BY: ', value=await self.config.user(ctx.author).info.lastupdate(), inline=False)
             await ctx.send(embed=embed)
 
@@ -130,6 +131,7 @@ class Session:
              await ctx.send("User details updated")
         if stype == "weapon" and ctx.channel.id == 455140064721109002:
             await self.config.user(ctx.author).info.weapon.set(text)
+            await ctx.send("User details updated")
         if stype == "hr" and ctx.channel.id == 455140064721109002:
             try: 
                 if int(text) > 999 or int(text) < 0:
