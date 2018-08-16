@@ -22,6 +22,7 @@ class Session:
             "info": {
                 "name": "none",
                 "hr": "0",
+                "weapon": "none",
                 "lastupdate": 0      
             }
         }
@@ -117,8 +118,8 @@ class Session:
         if ctx.invoked_subcommand is None and ctx.channel.id == 455140064721109002:
             embed=discord.Embed(title='User Details')
             embed.add_field(name='Name: ', value=await self.config.user(ctx.author).info.name(), inline=False)
-            embed.add_field(name='HR: ', value=await self.config.user(ctx.author).info.hr(), inline=True)
-            embed.add_field(name='LAST UPDATED BY: ', value=await self.config.user(ctx.author).info.lastupdate(), inline=True)
+            embed.add_field(name='HR: ', value=await self.config.user(ctx.author).info.hr(), inline=False)
+            embed.add_field(name='LAST UPDATED BY: ', value=await self.config.user(ctx.author).info.lastupdate(), inline=False)
             await ctx.send(embed=embed)
 
     @hunter.command(name="set")
@@ -127,6 +128,8 @@ class Session:
              await self.config.user(ctx.author).info.name.set(text)
              await self.config.user(ctx.author).info.lastupdate.set(ctx.author.id)
              await ctx.send("User details updated")
+        if stype == "weapon" and ctx.channel.id == 455140064721109002:
+            await self.config.user(ctx.author).info.weapon.set(text)
         if stype == "hr" and ctx.channel.id == 455140064721109002:
             try: 
                 if int(text) > 999 or int(text) < 0:
