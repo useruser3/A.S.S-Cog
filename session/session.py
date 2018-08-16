@@ -112,7 +112,7 @@ class Session:
 
 #user commands(guildcard)
     @commands.group(autohelp=False)
-    async def user(self,ctx):
+    async def hunter(self,ctx):
         duser = await self.config.user(ctx.author).info.lastupdate() 
         if ctx.invoked_subcommand is None:
             embed=discord.Embed(title='User Details')
@@ -121,11 +121,11 @@ class Session:
             embed.add_field(name='LAST UPDATED BY: ', value=await self.config.user(ctx.author).info.lastupdate(), inline=True)
             await ctx.send(embed=embed)
     
-    @user.command(name="info")
+    @hunter.command(name="info")
     async def ulist(self,ctx):
         await ctx.send(await self.config.user(ctx.author).info.name())
 
-    @user.command(name="set")
+    @hunter.command(name="set")
     async def set(self,ctx,stype,*,text):
         if stype == "name":
              await self.config.user(ctx.author).info.name.set(text)
