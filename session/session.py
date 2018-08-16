@@ -59,20 +59,25 @@ class Session:
         elif stype == "ace" and ctx.channel.id == acechannel:
             await ctx.send("```" + "The session ID for " + stype + " is now:" + " " + text + "```")
             await self.config.sessions.ace.set(text)
-            await ctx.send("need to do ace check code :smile:")
         else:
             await ctx.send("invalid team")
 
 
     @session.command(name="list")
     async def slist(self,ctx):
+        """lists all sessions"""
         embed=discord.Embed(title='Session List')
-        embed.add_field(name='APEX: ', value=await self.config.sessions.apex(), inline=False)
-        embed.add_field(name='APEX2: ', value=await self.config.sessions.apex2(), inline=False)
-        embed.add_field(name='APEX3: ', value=await self.config.sessions.apex3(), inline=False)
-        embed.add_field(name='APEX4: ', value=await self.config.sessions.apex4(), inline=False)
-        embed.add_field(name='APEX5: ', value=await self.config.sessions.apex5(), inline=False)
-        if ctx.channel.id == acechannel:
+        if self.config.sessions.apex() != "none":
+            embed.add_field(name='APEX: ', value=await self.config.sessions.apex(), inline=False)
+        if self.config.sessions.apex2() != "none":   
+            embed.add_field(name='APEX2: ', value=await self.config.sessions.apex2(), inline=False)
+        if self.config.sessions.apex3() != "none":
+            embed.add_field(name='APEX3: ', value=await self.config.sessions.apex3(), inline=False)
+        if self.config.sessions.apex4() != "none":
+            embed.add_field(name='APEX4: ', value=await self.config.sessions.apex4(), inline=False)
+        if self.config.sessions.apex5() != "none":
+            embed.add_field(name='APEX5: ', value=await self.config.sessions.apex5(), inline=False)
+        if ctx.channel.id == acechannel or self.config.sessions.ace() != "none"::
                 embed.add_field(name='ACE: ', value=await self.config.sessions.ace(), inline=False)
         await ctx.send(embed=embed)
 
@@ -114,6 +119,7 @@ class Session:
 #user commands(guildcard)
     @commands.group(autohelp=False)
     async def hunter(self,ctx):
+        """shows your guild card"""
         duser = await self.config.user(ctx.author).info.lastupdate() 
         if ctx.invoked_subcommand is None and ctx.channel.id == 455140064721109002:
             embed=discord.Embed(title='User Details')
@@ -125,6 +131,7 @@ class Session:
 
     @hunter.command(name="set")
     async def set(self,ctx,stype,*,text):
+        """set the details of your guild card. you can set your name, hr and weapon"""
         if stype == "name" and ctx.channel.id == 455140064721109002:
              await self.config.user(ctx.author).info.name.set(text)
              await self.config.user(ctx.author).info.lastupdate.set(ctx.author.id)
