@@ -129,7 +129,7 @@ class Session:
             embed.add_field(name='LAST UPDATED BY: ', value=await self.config.user(ctx.author).info.lastupdate(), inline=False)
             await ctx.send(embed=embed)
 
-    @hunter.command(name="set")
+    @hunter.command(name="set", autohelp=False)
     async def set(self,ctx,stype,*,text):
         """set the details of your guild card. you can set your name, hr and weapon"""
         if stype == "name" and ctx.channel.id == 455140064721109002:
