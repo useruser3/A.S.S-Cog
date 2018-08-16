@@ -77,7 +77,7 @@ class Session:
             embed.add_field(name='APEX4: ', value=await self.config.sessions.apex4(), inline=False)
         if self.config.sessions.apex5() != "none":
             embed.add_field(name='APEX5: ', value=await self.config.sessions.apex5(), inline=False)
-        if ctx.channel.id == acechannel or self.config.sessions.ace() != "none"::
+        if ctx.channel.id == acechannel or self.config.sessions.ace() != "none":
                 embed.add_field(name='ACE: ', value=await self.config.sessions.ace(), inline=False)
         await ctx.send(embed=embed)
 
