@@ -114,24 +114,20 @@ class Session:
     @commands.group(autohelp=False)
     async def hunter(self,ctx):
         duser = await self.config.user(ctx.author).info.lastupdate() 
-        if ctx.invoked_subcommand is None:
+        if ctx.invoked_subcommand is None and ctx.channel.id == 455140064721109002:
             embed=discord.Embed(title='User Details')
             embed.add_field(name='Name: ', value=await self.config.user(ctx.author).info.name(), inline=False)
             embed.add_field(name='HR: ', value=await self.config.user(ctx.author).info.hr(), inline=True)
             embed.add_field(name='LAST UPDATED BY: ', value=await self.config.user(ctx.author).info.lastupdate(), inline=True)
             await ctx.send(embed=embed)
-    
-    @hunter.command(name="info")
-    async def ulist(self,ctx):
-        await ctx.send(await self.config.user(ctx.author).info.name())
 
     @hunter.command(name="set")
     async def set(self,ctx,stype,*,text):
-        if stype == "name":
+        if stype == "name" and ctx.channel.id == 455140064721109002:
              await self.config.user(ctx.author).info.name.set(text)
              await self.config.user(ctx.author).info.lastupdate.set(ctx.author.id)
              await ctx.send("User details updated")
-        if stype == "hr":
+        if stype == "hr" and ctx.channel.id == 455140064721109002:
             try: 
                 if int(text) > 999 or int(text) < 0:
                     await ctx.send("Error: Please select a value lower than 1000 and greater than -1 :smile:")
