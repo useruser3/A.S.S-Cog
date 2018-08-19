@@ -136,10 +136,10 @@ class Session:
              await self.config.user(ctx.author).info.name.set(text)
              await self.config.user(ctx.author).info.lastupdate.set(ctx.author.id)
              await ctx.send("User details updated")
-        if stype == "weapon" and ctx.channel.id == 455140064721109002:
+        elif stype == "weapon" and ctx.channel.id == 455140064721109002:
             await self.config.user(ctx.author).info.weapon.set(text)
             await ctx.send("User details updated")
-        if stype == "hr" and ctx.channel.id == 455140064721109002:
+        elif stype == "hr" and ctx.channel.id == 455140064721109002:
             try: 
                 if int(text) > 999 or int(text) < 0:
                     await ctx.send("Error: Please select a value lower than 1000 and greater than -1 :smile:")
@@ -150,3 +150,5 @@ class Session:
                     await self.config.user(ctx.author).info.hr.set(text)
                     await self.config.user(ctx.author).info.lastupdate.set(ctx.author.id)
                     await ctx.send("User details updated")
+        else:
+                return
