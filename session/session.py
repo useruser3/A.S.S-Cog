@@ -2,6 +2,14 @@ from redbot.core import commands
 from redbot.core import Config
 import discord
 acechannel = 474639017422356491
+
+def is_channel(channel_id):
+            def predicate(ctx):
+                 return ctx.channel.id == channel_id
+            return commands.check(predicate)
+            return ctx.send("error")
+
+
 class Session:
     def __init__(self):
         #start config section
@@ -29,7 +37,6 @@ class Session:
         self.config.register_global(**default_global)
         self.config.register_user(**default_user)
         #end config
-
 
     #session commands
     @commands.group(autohelp=False)
@@ -117,11 +124,12 @@ class Session:
 
 
 #user commands(guildcard)
+    @is_channel(455140064721109002)
     @commands.group(autohelp=False)
     async def hunter(self,ctx):
         """shows your guild card"""
         duser = await self.config.user(ctx.author).info.lastupdate() 
-        if ctx.invoked_subcommand is None and ctx.channel.id == 455140064721109002:
+        if ctx.invoked_subcommand is None:
             embed=discord.Embed(title='User Details')
             embed.add_field(name='Name: ', value=await self.config.user(ctx.author).info.name(), inline=False)
             embed.add_field(name='HR: ', value=await self.config.user(ctx.author).info.hr(), inline=False)
@@ -132,14 +140,14 @@ class Session:
     @hunter.command(name="set", autohelp=False)
     async def set(self,ctx,stype,*,text):
         """set the details of your guild card. you can set your name, hr and weapon"""
-        if stype == "name" and ctx.channel.id == 455140064721109002:
+        if stype == "name":
              await self.config.user(ctx.author).info.name.set(text)
              await self.config.user(ctx.author).info.lastupdate.set(ctx.author.id)
              await ctx.send("User details updated")
-        elif stype == "weapon" and ctx.channel.id == 455140064721109002:
+        elif stype == "weapon":
             await self.config.user(ctx.author).info.weapon.set(text)
             await ctx.send("User details updated")
-        elif stype == "hr" and ctx.channel.id == 455140064721109002:
+        elif stype == "hr":
             try: 
                 if int(text) > 999 or int(text) < 0:
                     await ctx.send("Error: Please select a value lower than 1000 and greater than -1 :smile:")
@@ -150,5 +158,3 @@ class Session:
                     await self.config.user(ctx.author).info.hr.set(text)
                     await self.config.user(ctx.author).info.lastupdate.set(ctx.author.id)
                     await ctx.send("User details updated")
-        else:
-                return
