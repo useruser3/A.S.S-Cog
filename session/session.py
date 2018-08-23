@@ -8,6 +8,11 @@ def is_channel(channel_id):
                  return ctx.channel.id == channel_id
             return commands.check(predicate)
             return ctx.send("error")
+def is_channel_not(channel_id):
+            def predicate(ctx):
+                 return ctx.channel.id != channel_id
+            return commands.check(predicate)
+            return ctx.send("error")
 
 
 class Session:
@@ -39,6 +44,7 @@ class Session:
         #end config
 
     #session commands
+    @is_channel_not(455080960455868417)
     @commands.group(autohelp=False)
     async def session(self,ctx):
         """type ```session``` followed by team to see the current session. leave team blank to see a general session"""
