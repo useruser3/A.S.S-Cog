@@ -46,7 +46,7 @@ class Session:
     #session commands
     @is_channel_not(455080960455868417)
     @commands.group(autohelp=False)
-    async def session(self,ctx):
+    async def session(self,ctx):        
         """type ```session``` followed by team to see the current session. leave team blank to see a general session"""
         if ctx.invoked_subcommand is None:
             await ctx.send("The current main session is " + "```" + await self.config.sessions.apex() + "```")
@@ -127,40 +127,3 @@ class Session:
             await ctx.send("The current session for ace is " + "```" + await self.config.sessions.ace() + "```")
         else:
             return
-
-
-#user commands(guildcard)
-    @is_channel(455140064721109002)
-    @commands.group(autohelp=False)
-    async def hunter(self,ctx):
-        """shows your guild card"""
-        duser = await self.config.user(ctx.author).info.lastupdate() 
-        if ctx.invoked_subcommand is None:
-            embed=discord.Embed(title='User Details')
-            embed.add_field(name='Name: ', value=await self.config.user(ctx.author).info.name(), inline=False)
-            embed.add_field(name='HR: ', value=await self.config.user(ctx.author).info.hr(), inline=False)
-            embed.add_field(name='WEAPON: ', value=await self.config.user(ctx.author).info.weapon(), inline=False)
-            embed.add_field(name='LAST UPDATED BY: ', value=await self.config.user(ctx.author).info.lastupdate(), inline=False)
-            await ctx.send(embed=embed)
-
-    @hunter.command(name="set", autohelp=False)
-    async def set(self,ctx,stype,*,text):
-        """set the details of your guild card. you can set your name, hr and weapon"""
-        if stype == "name":
-             await self.config.user(ctx.author).info.name.set(text)
-             await self.config.user(ctx.author).info.lastupdate.set(ctx.author.id)
-             await ctx.send("User details updated")
-        elif stype == "weapon":
-            await self.config.user(ctx.author).info.weapon.set(text)
-            await ctx.send("User details updated")
-        elif stype == "hr":
-            try: 
-                if int(text) > 999 or int(text) < 0:
-                    await ctx.send("Error: Please select a value lower than 1000 and greater than -1 :smile:")
-                    return
-            except:
-                await ctx.send("Error: HR must be a number :smile:")
-            else:
-                    await self.config.user(ctx.author).info.hr.set(text)
-                    await self.config.user(ctx.author).info.lastupdate.set(ctx.author.id)
-                    await ctx.send("User details updated")
