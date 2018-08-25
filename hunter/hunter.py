@@ -27,7 +27,7 @@ class Hunter:
         return self._config
 
 #user commands(guildcard)
-    #@is_channel(455140064721109002)
+    @is_channel(455140064721109002)
     @commands.group(autohelp=False)
     async def hunter(self,ctx):
         """shows your guild card"""
