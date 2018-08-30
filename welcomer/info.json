@@ -1,0 +1,12 @@
+{
+    "AUTHOR" : "Useruser3",
+    "DESCRIPTION" : "Allows management of MHW sessions using channel topic",
+    "INSTALL_MSG" : "Thanks for adding my cog ;)",
+    "NAME" : "Session",
+    "REQUIREMENTS" : [],
+    "SHORT" : "manages mhw sessions",
+    "TAGS" : [
+        "game",
+        "mhw"
+    ]
+}
