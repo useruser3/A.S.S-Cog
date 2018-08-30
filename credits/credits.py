@@ -28,7 +28,7 @@ class Credits:
 
 #credits commands
     @commands.group(autohelp=False)
-    async def credits2(self,ctx):
+    async def credits(self,ctx):
         """shows credits for the bot"""
         self.get_config(ctx)
         user_data = self._config.user(ctx.author)
