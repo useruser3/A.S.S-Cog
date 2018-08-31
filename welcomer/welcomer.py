@@ -26,9 +26,6 @@ class Welcomer:
             self._config = ctx.bot.get_cog("Session").config
         return self._config
 
-async  def  on_member_join(self, member):
-    server = member.guild.name
-    member.send(f"Welcome to {server}. member.mention")
 
 #welcomer commands
     @commands.group(autohelp=False)
