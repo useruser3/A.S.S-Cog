@@ -33,4 +33,4 @@ class Credits:
         self.get_config(ctx)
         user_data = self._config.user(ctx.author)
         if ctx.invoked_subcommand is None:
-            await ctx.send("My coder was useruser3 and my meowrtist was Sarah Kenny of deviant art and the community of this discord. \nYou cana find more of Sarah's work at https://www.deviantart.com/sassie-kay Nya!  ")
+            await ctx.send("My coder was useruser3 and my meowrtist was Sarah Kenny of deviant art and the community of this discord. \nYou can find more of Sarah's work at https://www.deviantart.com/sassie-kay Nya!  ")
