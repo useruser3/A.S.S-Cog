@@ -28,7 +28,7 @@ class Welcomer:
 
 async  def  on_member_join(self, member):
     server = member.guild.name
-    member.send(f"Welcome to {server}.")
+    member.send(f"Welcome to {server}. member.mention")
 
 #welcomer commands
     @commands.group(autohelp=False)
