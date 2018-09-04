@@ -26,14 +26,14 @@ class Welcomer:
             self._config = ctx.bot.get_cog("Session").config
         return self._config
 
-async  def on_member_join(self, member):
-    server = member.guild.name
-    await member.send(f"Welcome {member.mention} to {server}. Please read pinned message and head over to <#481295578530185226> for help getting your roles and access to channels. Thank you enjoy.")
+# async  def on_member_join(self, member):
+#     server = member.guild.name
+#     await member.send(f"Welcome {member.mention} to {server}. Please read pinned message and head over to <#481295578530185226> for help getting your roles and access to channels. Thank you enjoy.")
 
-async  def on_member_leave(self, member):
-    channel = bot.get_channel(481390232521015296)
-    await channel.send(f"Sorry to see you go {member}")
-    @commands.group(autohelp=False)
+# async  def on_member_leave(self, member):
+#     channel = bot.get_channel(481390232521015296)
+#     await channel.send(f"Sorry to see you go {member}")
+#     @commands.group(autohelp=False)
     
     async def welcomer(self,ctx):
         """shows credits for the bot"""
