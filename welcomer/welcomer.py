@@ -27,13 +27,13 @@ class Welcomer:
         return self._config
 
     async  def on_member_join(self, member):
-        channel = 481390232521015296
         server = member.guild.name
+        channel = self.bot.get_channel(481390232521015296)
         await channel.send(f"Welcome {member.mention} to {server}. Please read pinned message and head over to <#481295578530185226> for help getting your roles and access to channels. Thank you enjoy.")
 
     async  def on_member_leave(self, member):
-            channel = 481390232521015296
-            await channel.send(f"Sorry to see you go {member}")
+        channel = self.bot.get_channel(481390232521015296)
+        await channel.send(f"Sorry to see you go {member}")
     
 #welcomer commands
     @commands.group(autohelp=False)
