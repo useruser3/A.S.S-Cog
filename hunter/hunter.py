@@ -34,6 +34,7 @@ class Hunter:
         self.get_config(ctx)
         user_data = self._config.user(ctx.author)               
         duser = await user_data.info.lastupdate()
+        duser2 = await user_data.info.lastupdate2()
 
         if ctx.invoked_subcommand is None and subaccount == 1:
 
@@ -45,10 +46,10 @@ class Hunter:
             await ctx.send(embed=embed)
         if ctx.invoked_subcommand is None and subaccount == 2:
             embed=discord.Embed(title='User Details')
-            embed.add_field(name='Name: ', value=await user_data.info2.name(), inline=False)
-            embed.add_field(name='HR: ', value=await user_data.info2.hr(), inline=False)
-            embed.add_field(name='WEAPON: ', value=await user_data.info2.weapon(), inline=False)
-            embed.add_field(name='LAST UPDATED BY: ', value=await user_data.info2.lastupdate(), inline=False)
+            embed.add_field(name='Name: ', value=await user_data.info.name2(), inline=False)
+            embed.add_field(name='HR: ', value=await user_data.info.hr2(), inline=False)
+            embed.add_field(name='WEAPON: ', value=await user_data.info.weapon2(), inline=False)
+            embed.add_field(name='LAST UPDATED BY: ', value=await user_data.info.lastupdate2(), inline=False)
 
     @hunter.command(name="set", autohelp=False)
     async def set(self,ctx,stype,*,text):
@@ -75,19 +76,19 @@ class Hunter:
                     await user_data.info.lastupdate.set(ctx.author.id)
                     await ctx.send("User details updated")
 
-                    
+
     @hunter.command(name="set2", autohelp=False)
     async def set2(self,ctx,stype,*,text):
 
         user_data = self._config.user(ctx.author)
         """set the details of your guild card. you can set your name, hr and weapon"""
         if stype == "name":
-             await user_data.info2.name.set(text)
-             await user_data.info2.lastupdate.set(ctx.author.id)
+             await user_data.info.name2.set(text)
+             await user_data.info.lastupdate2.set(ctx.author.id)
              await ctx.send("User details updated")
         elif stype == "weapon":
-            await user_data.info2.weapon.set(text)
-            await user_data.info2.lastupdate.set(ctx.author.id)
+            await user_data.info.weapon2.set(text)
+            await user_data.info.lastupdate2.set(ctx.author.id)
             await ctx.send("User details updated")
         elif stype == "hr":
             try: 
@@ -97,6 +98,6 @@ class Hunter:
             except:
                 await ctx.send("Error: HR must be a number :smile:")
             else:
-                    await user_data.info2.hr.set(text)
-                    await user_data.info2.lastupdate.set(ctx.author.id)
+                    await user_data.info.hr2.set(text)
+                    await user_data.info.lastupdate2.set(ctx.author.id)
                     await ctx.send("User details updated")
