@@ -32,7 +32,7 @@ class Welcomer:
         channel = self.bot.get_channel(481390232521015296)
         await channel.send(f"Welcome {member.mention} to {server}. Please read pinned message and head over to <#481295578530185226> for help getting your roles and access to channels. Thank you enjoy.")
 
-    async  def on_member_leave(self, member):
+    async  def on_member_remove(self, member):
         channel = self.bot.get_channel(481390232521015296)
         await channel.send(f"Sorry to see you go {member}")
     
