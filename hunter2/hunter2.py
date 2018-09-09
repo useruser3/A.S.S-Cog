@@ -43,7 +43,7 @@ class Hunter2:
             embed.add_field(name='LAST UPDATED BY: ', value=await user_data.info.lastupdate2(), inline=False)
             await ctx.send(embed=embed)
 
-    @hunter.command(name="set", autohelp=False)
+    @hunter2.command(name="set", autohelp=False)
     async def set(self,ctx,stype,*,text):
 
         user_data = self._config.user(ctx.author)
