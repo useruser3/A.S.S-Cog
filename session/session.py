@@ -36,13 +36,11 @@ class Session:
                 "name": "none",
                 "hr": "0",
                 "weapon": "none",
-                "lastupdate": 0      
-            }
-            "info2": {
-                "name": "none",
-                "hr": "0",
-                "weapon": "none",
-                "lastupdate": 0      
+                "lastupdate": 0,
+                "name2": "none",
+                "hr2": "0",
+                "weapon2": "none",
+                "lastupdate2": 0          
             }
         }
         self.config.register_global(**default_global)
