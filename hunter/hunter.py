@@ -29,7 +29,7 @@ class Hunter:
 #user commands(guildcard)
     @is_channel(455140064721109002)
     @commands.group(autohelp=False)
-    async def hunter(self,ctx,subaccount=1):
+    async def hunter(self,ctx,subaccount=1,subcommand):
         """shows your guild card"""
         self.get_config(ctx)
         user_data = self._config.user(ctx.author)               
@@ -44,7 +44,7 @@ class Hunter:
             embed.add_field(name='WEAPON: ', value=await user_data.info.weapon(), inline=False)
             embed.add_field(name='LAST UPDATED BY: ', value=await user_data.info.lastupdate(), inline=False)
             await ctx.send(embed=embed)
-        if ctx.invoked_subcommand is None and subaccount == 2:
+        elif ctx.invoked_subcommand is None and subaccount == 2:
             embed=discord.Embed(title='User Details')
             embed.add_field(name='Name: ', value=await user_data.info.name2(), inline=False)
             embed.add_field(name='HR: ', value=await user_data.info.hr2(), inline=False)
