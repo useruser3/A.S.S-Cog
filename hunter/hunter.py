@@ -29,27 +29,18 @@ class Hunter:
 #user commands(guildcard)
     @is_channel(455140064721109002)
     @commands.group(autohelp=False)
-    async def hunter(self,ctx,subaccount=1):
+    async def hunter(self,ctx):
         """shows your guild card"""
         self.get_config(ctx)
-        user_data = self._config.user(ctx.author)               
-        duser = await user_data.info.lastupdate()
-        duser2 = await user_data.info.lastupdate2()
-
-        if ctx.invoked_subcommand is None and subaccount == 1:
+        user_data = self._config.user(ctx.author)
+        duser = await user_data.info.lastupdate() 
+        if ctx.invoked_subcommand is None:
 
             embed=discord.Embed(title='User Details')
             embed.add_field(name='Name: ', value=await user_data.info.name(), inline=False)
             embed.add_field(name='HR: ', value=await user_data.info.hr(), inline=False)
             embed.add_field(name='WEAPON: ', value=await user_data.info.weapon(), inline=False)
             embed.add_field(name='LAST UPDATED BY: ', value=await user_data.info.lastupdate(), inline=False)
-            await ctx.send(embed=embed)
-        elif ctx.invoked_subcommand is None and subaccount == 2:
-            embed=discord.Embed(title='User Details')
-            embed.add_field(name='Name: ', value=await user_data.info.name2(), inline=False)
-            embed.add_field(name='HR: ', value=await user_data.info.hr2(), inline=False)
-            embed.add_field(name='WEAPON: ', value=await user_data.info.weapon2(), inline=False)
-            embed.add_field(name='LAST UPDATED BY: ', value=await user_data.info.lastupdate2(), inline=False)
             await ctx.send(embed=embed)
 
     @hunter.command(name="set", autohelp=False)
@@ -77,8 +68,24 @@ class Hunter:
                     await user_data.info.lastupdate.set(ctx.author.id)
                     await ctx.send("User details updated")
 
-    @hunter.command(name="set2", autohelp=False)
-    async def set2(self,ctx,stype,*,text):
+    @is_channel(455140064721109002)
+    @commands.group(autohelp=False)
+    async def hunter2(self,ctx):
+        """shows your guild card"""
+        self.get_config(ctx)
+        user_data = self._config.user(ctx.author)
+        duser = await user_data.info.lastupdate2() 
+        if ctx.invoked_subcommand is None:
+
+            embed=discord.Embed(title='User Details')
+            embed.add_field(name='Name: ', value=await user_data.info.name2(), inline=False)
+            embed.add_field(name='HR: ', value=await user_data.info.hr2(), inline=False)
+            embed.add_field(name='WEAPON: ', value=await user_data.info.weapon2(), inline=False)
+            embed.add_field(name='LAST UPDATED BY: ', value=await user_data.info.lastupdate2(), inline=False)
+            await ctx.send(embed=embed)
+
+    @hunter2.command(name="set", autohelp=False)
+    async def set(self,ctx,stype,*,text):
 
         user_data = self._config.user(ctx.author)
         """set the details of your guild card. you can set your name, hr and weapon"""
