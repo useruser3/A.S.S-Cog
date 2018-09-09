@@ -63,7 +63,7 @@ class Session:
                 embed.add_field(name='APEX5: ', value=await self.config.sessions.apex5(), inline=False)
             if ctx.channel.id == acechannel and await self.config.sessions.ace() != "none":
                 embed.add_field(name='ACE: ', value=await self.config.sessions.ace(), inline=False)
-                await ctx.send(embed=embed)
+            await ctx.send(embed=embed)
 
     @session.command(name="set")
     async def set_session(self,ctx,stype,*,text):
