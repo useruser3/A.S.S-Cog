@@ -33,7 +33,7 @@ class Hunter2:
         """shows your guild card"""
         self.get_config(ctx)
         user_data = self._config.user(ctx.author)
-        duser = await user_data.info2.lastupdate() 
+        duser = await user_data.info.lastupdate2() 
         if ctx.invoked_subcommand is None:
 
             embed=discord.Embed(title='User Details')
