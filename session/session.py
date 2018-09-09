@@ -68,21 +68,7 @@ class Session:
     @session.command(name="set")
     async def set_session(self,ctx,stype,*,text):
         """Type set and the team you want to update followed by the new session ID (stype is the name of the team colour and text is the session ID)""" 
-        if stype == " """lists all sessions"""
-        embed=discord.Embed(title='Session List')
-        if await self.config.sessions.apex() != "none":
-            embed.add_field(name='APEX: ', value=await self.config.sessions.apex(), inline=False)
-        if await self.config.sessions.apex2() != "none":   
-            embed.add_field(name='APEX2: ', value=await self.config.sessions.apex2(), inline=False)
-        if await self.config.sessions.apex3() != "none":
-            embed.add_field(name='APEX3: ', value=await self.config.sessions.apex3(), inline=False)
-        if await self.config.sessions.apex4() != "none":
-            embed.add_field(name='APEX4: ', value=await self.config.sessions.apex4(), inline=False)
-        if await self.config.sessions.apex5() != "none":
-            embed.add_field(name='APEX5: ', value=await self.config.sessions.apex5(), inline=False)
-        if ctx.channel.id == acechannel:
-                embed.add_field(name='ACE: ', value=await self.config.sessions.ace(), inline=False)
-        await ctx.send(embed=embed)apex":
+        if stype == "apex":
             await ctx.send("```" + "The session ID for " + stype + " is now:" + " " + text + "```")
             await self.config.sessions.apex.set(text)
         elif stype == "apex2":
