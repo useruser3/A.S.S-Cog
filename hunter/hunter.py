@@ -29,10 +29,8 @@ class Hunter:
 #user commands(guildcard)
     @is_channel(455140064721109002)
     @commands.group(autohelp=False)
-    async def hunter(self,ctx,subaccount):
+    async def hunter(self,ctx,subaccount=1):
         """shows your guild card"""
-        if subaccount == None:
-            subaccount = 1
         self.get_config(ctx)
         user_data = self._config.user(ctx.author)               
         duser = await user_data.info.lastupdate()
@@ -55,7 +53,7 @@ class Hunter:
             await ctx.send(embed=embed)
 
     @hunter.command(name="set", autohelp=False)
-    async def set(self,ctx,stype,*,text):
+    async def set(self,ctx,subaccount=1,stype,*,text):
 
         user_data = self._config.user(ctx.author)
         """set the details of your guild card. you can set your name, hr and weapon"""
