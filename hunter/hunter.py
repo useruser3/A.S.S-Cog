@@ -53,7 +53,7 @@ class Hunter:
             await ctx.send(embed=embed)
 
     @hunter.command(name="set", autohelp=False)
-    async def set(self,ctx,stype,accountnumber=1,*,text):
+    async def set(self,ctx,accountnumber=1,stype,*,text):
 
         user_data = self._config.user(ctx.author)
         """set the details of your guild card. you can set your name, hr and weapon"""
