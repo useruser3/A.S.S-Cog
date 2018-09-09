@@ -51,19 +51,19 @@ class Session:
         if ctx.invoked_subcommand is None:
             """lists all active sessions"""
             embed=discord.Embed(title='Session List')
-                if await self.config.sessions.apex() != "none":
-                    embed.add_field(name='APEX: ', value=await self.config.sessions.apex(), inline=False)
-                if await self.config.sessions.apex2() != "none":   
-                    embed.add_field(name='APEX2: ', value=await self.config.sessions.apex2(), inline=False)
-                if await self.config.sessions.apex3() != "none":
-                    embed.add_field(name='APEX3: ', value=await self.config.sessions.apex3(), inline=False)
-                if await self.config.sessions.apex4() != "none":
-                    embed.add_field(name='APEX4: ', value=await self.config.sessions.apex4(), inline=False)
-                if await self.config.sessions.apex5() != "none":
-                    embed.add_field(name='APEX5: ', value=await self.config.sessions.apex5(), inline=False)
-                if ctx.channel.id == acechannel and await self.config.sessions.ace() != "none":
-                    embed.add_field(name='ACE: ', value=await self.config.sessions.ace(), inline=False)
-                   await ctx.send(embed=embed)
+            if await self.config.sessions.apex() != "none":
+                embed.add_field(name='APEX: ', value=await self.config.sessions.apex(), inline=False)
+            if await self.config.sessions.apex2() != "none":   
+                embed.add_field(name='APEX2: ', value=await self.config.sessions.apex2(), inline=False)
+            if await self.config.sessions.apex3() != "none":
+                embed.add_field(name='APEX3: ', value=await self.config.sessions.apex3(), inline=False)
+            if await self.config.sessions.apex4() != "none":
+                embed.add_field(name='APEX4: ', value=await self.config.sessions.apex4(), inline=False)
+            if await self.config.sessions.apex5() != "none":
+                embed.add_field(name='APEX5: ', value=await self.config.sessions.apex5(), inline=False)
+            if ctx.channel.id == acechannel and await self.config.sessions.ace() != "none":
+                embed.add_field(name='ACE: ', value=await self.config.sessions.ace(), inline=False)
+                await ctx.send(embed=embed)
 
     @session.command(name="set")
     async def set_session(self,ctx,stype,*,text):
