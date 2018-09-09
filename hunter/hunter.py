@@ -77,7 +77,7 @@ class Hunter:
                     await user_data.info.lastupdate.set(ctx.author.id)
                     await ctx.send("User details updated")
 
-     @hunter.command(name="set2", autohelp=False)
+    @hunter.command(name="set2", autohelp=False)
     async def set2(self,ctx,stype,*,text):
 
         user_data = self._config.user(ctx.author)
