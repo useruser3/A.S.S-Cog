@@ -29,7 +29,7 @@ class Hunter:
 #user commands(guildcard)
     @is_channel(455140064721109002)
     @commands.group(autohelp=False)
-    async def hunter(self,ctx,subaccount=1,subcommand):
+    async def hunter(self,ctx,subaccount=1):
         """shows your guild card"""
         self.get_config(ctx)
         user_data = self._config.user(ctx.author)               
@@ -53,39 +53,19 @@ class Hunter:
             await ctx.send(embed=embed)
 
     @hunter.command(name="set", autohelp=False)
-    async def set(self,ctx,stype,accountnumber=1,*,text):
+    async def set(self,ctx,stype,*,text):
 
         user_data = self._config.user(ctx.author)
         """set the details of your guild card. you can set your name, hr and weapon"""
-        if stype == "name" and accountnumber == 1:
+        if stype == "name":
              await user_data.info.name.set(text)
              await user_data.info.lastupdate.set(ctx.author.id)
              await ctx.send("User details updated")
-        elif stype == "weapon" and accountnumber == 1:
+        elif stype == "weapon":
             await user_data.info.weapon.set(text)
             await user_data.info.lastupdate.set(ctx.author.id)
             await ctx.send("User details updated")
-        elif stype == "hr" and accountnumber == 1:
-            try: 
-                if int(text) > 999 or int(text) < 0:
-                    await ctx.send("Error: Please select a value lower than 1000 and greater than -1 :smile:")
-                    return
-            except:
-                await ctx.send("Error: HR must be a number :smile:")
-            else:
-                    await user_data.info.hr.set(text)
-                    await user_data.info.lastupdate.set(ctx.author.id)
-                    await ctx.send("User details updated")
-
-        if stype == "name" and accountnumber == 2:
-             await user_data.info.name.set(text)
-             await user_data.info.lastupdate.set(ctx.author.id)
-             await ctx.send("User details updated")
-        elif stype == "weapon" and accountnumber == 2:
-            await user_data.info.weapon.set(text)
-            await user_data.info.lastupdate.set(ctx.author.id)
-            await ctx.send("User details updated")
-        elif stype == "hr" and accountnumber == 2:
+        elif stype == "hr":
             try: 
                 if int(text) > 999 or int(text) < 0:
                     await ctx.send("Error: Please select a value lower than 1000 and greater than -1 :smile:")
