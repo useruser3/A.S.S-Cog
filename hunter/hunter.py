@@ -76,3 +76,28 @@ class Hunter:
                     await user_data.info.hr.set(text)
                     await user_data.info.lastupdate.set(ctx.author.id)
                     await ctx.send("User details updated")
+
+     @hunter.command(name="set2", autohelp=False)
+    async def set2(self,ctx,stype,*,text):
+
+        user_data = self._config.user(ctx.author)
+        """set the details of your guild card. you can set your name, hr and weapon"""
+        if stype == "name":
+             await user_data.info.name2.set(text)
+             await user_data.info.lastupdate2.set(ctx.author.id)
+             await ctx.send("User details updated")
+        elif stype == "weapon":
+            await user_data.info.weapon2.set(text)
+            await user_data.info.lastupdate2.set(ctx.author.id)
+            await ctx.send("User details updated")
+        elif stype == "hr":
+            try: 
+                if int(text) > 999 or int(text) < 0:
+                    await ctx.send("Error: Please select a value lower than 1000 and greater than -1 :smile:")
+                    return
+            except:
+                await ctx.send("Error: HR must be a number :smile:")
+            else:
+                    await user_data.info.hr2.set(text)
+                    await user_data.info.lastupdate2.set(ctx.author.id)
+                    await ctx.send("User details updated")
