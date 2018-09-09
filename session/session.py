@@ -38,6 +38,12 @@ class Session:
                 "weapon": "none",
                 "lastupdate": 0      
             }
+            "info2": {
+                "name": "none",
+                "hr": "0",
+                "weapon": "none",
+                "lastupdate": 0      
+            }
         }
         self.config.register_global(**default_global)
         self.config.register_user(**default_user)
