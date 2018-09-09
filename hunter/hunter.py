@@ -57,7 +57,7 @@ class Hunter:
 
         user_data = self._config.user(ctx.author)
         """set the details of your guild card. you can set your name, hr and weapon"""
-        if stype == "name":
+        if subaccount == 1 and stype == "name":
              await user_data.info.name.set(text)
              await user_data.info.lastupdate.set(ctx.author.id)
              await ctx.send("User details updated")
