@@ -16,8 +16,9 @@ def is_channel_not(channel_id):
 
 
 class Welcomer:
-    def __init__(self):
+    def __init__(self, bot):
         #start config section
+        self.bot = bot
         self._config = None
         #end config
 
