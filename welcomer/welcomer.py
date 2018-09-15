@@ -44,3 +44,11 @@ class Welcomer:
         user_data = self._config.user(ctx.author)
         if ctx.invoked_subcommand is None:
             await ctx.send("boop")
+
+    @commands.command(hidden=True)
+    async def meow(self,ctx,channel:int,*,text):
+        """
+        some description
+        """
+        channel = self.bot.get_channel(channel)
+        await channel.send(text)
