@@ -94,34 +94,35 @@ class Session:
             await ctx.send(embed=embed)
 
     @session.command(name="set")
-    async def set_session(self,ctx,stype,*,text):
-        """Type set and the team you want to update followed by the new session ID (stype is the name of the team colour and text is the session ID)""" 
-        newtext = text.replace(" ", "_")
+    @checks.mod_or_permissions()
+    async def set_session_id(self,ctx,*,str):
+        """Type set and the team you want to update followed by the new session ID (stype is the name of the team colour and text is the session ID)"""
+        stype,text = str.split(",")
         if stype == await self.config.sessions.session1.name() or stype == await self.config.sessions.session1.defaultname():
-            await ctx.send("```" + "The session ID for " + stype + " is now:" + " " + newtext + "```")
-            await self.config.sessions.session1.id.set(newtext)
+            await ctx.send("```" + "The session ID for " + stype + " is now:" + " " + text + "```")
+            await self.config.sessions.session1.id.set(text)
         elif stype == await self.config.sessions.session2.name() or stype == await self.config.sessions.session2.defaultname():
-            await ctx.send("```" + "The session ID for " + stype + " is now:" + " " + newtext + "```")
-            await self.config.sessions.session2.id.set(newtext)
+            await ctx.send("```" + "The session ID for " + stype + " is now:" + " " + text + "```")
+            await self.config.sessions.session2.id.set(text)
         elif stype == await self.config.sessions.session3.name() or stype == await self.config.sessions.session3.defaultname():
-            await ctx.send("```" + "The session ID for " + stype + " is now:" + " " + newtext + "```")
-            await self.config.sessions.session3.id.set(newtext)
+            await ctx.send("```" + "The session ID for " + stype + " is now:" + " " + text + "```")
+            await self.config.sessions.session3.id.set(text)
         elif stype == await self.config.sessions.session4.name() or stype == await self.config.sessions.session4.defaultname():
-            await ctx.send("```" + "The session ID for " + stype + " is now:" + " " + newtext + "```")
-            await self.config.sessions.session4.id.set(newtext)
+            await ctx.send("```" + "The session ID for " + stype + " is now:" + " " + text + "```")
+            await self.config.sessions.session4.id.set(text)
         elif stype == await self.config.sessions.session5.name() or stype == await self.config.sessions.session5.defaultname():
-            await ctx.send("```" + "The session ID for " + stype + " is now:" + " " + newtext + "```")
-            await self.config.sessions.session5.id.set(newtext)
+            await ctx.send("```" + "The session ID for " + stype + " is now:" + " " + text + "```")
+            await self.config.sessions.session5.id.set(text)
         elif stype == await self.config.sessions.session6.name() or stype == await self.config.sessions.session6.defaultname() and ctx.channel.id == acechannel:
-            await ctx.send("```" + "The session ID for " + stype + " is now:" + " " + newtext + "```")
-            await self.config.sessions.session6.id.set(newtext)
+            await ctx.send("```" + "The session ID for " + stype + " is now:" + " " + text + "```")
+            await self.config.sessions.session6.id.set(text)
         else:
             await ctx.send("invalid team")
 
     @session.command(name="setname")
     @checks.mod_or_permissions()
     async def set_session_name(self,ctx,*,str):
-        """some descriptive text will be here soon-james"""
+        """Type set and the team you want to update followed by the new session ID (stype is the name of the team colour and text is the session ID)"""
         stype,text = str.split(",")
         if stype == await self.config.sessions.session1.name() or stype == await self.config.sessions.session1.defaultname():
             await ctx.send("```" + "The session Name for " + stype + " is now:" + " " + text + "```")
