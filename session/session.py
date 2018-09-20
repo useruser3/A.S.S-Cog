@@ -28,7 +28,7 @@ async def get_names_list(self):
         temp=[]
         namelist=[]
         for session, session_data in session_dict.items():
-            if session_data['name'] != 'none':
+            if str(session_data['name']) != 'none':
                 temp = [session_data['name']]
                 namelist.append(temp)
         finaltext = replaceMultiple(str(namelist),['[',']',"'"], "")
