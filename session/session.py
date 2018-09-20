@@ -113,13 +113,9 @@ class Session:
                embed.add_field(name=await self.config.sessions.session5.name(), value=await self.config.sessions.session5.id(), inline=False)
             if ctx.channel.id == acechannel and await self.config.sessions.session6.id() != "none":
                 embed.add_field(name=await self.config.sessions.session6.name(), value=await self.config.sessions.session6.id(), inline=False)
-            #await ctx.send(embed=embed)
-            await ctx.send(await self.config.sessions.session1.name())
-            await ctx.send(await self.config.sessions.session2.name())
-            await ctx.send(await self.config.sessions.session3.name())
-            await ctx.send(await self.config.sessions.session4.name())
-            await ctx.send(await self.config.sessions.session5.name())
-            await ctx.send(await self.config.sessions.session6.name())
+            await ctx.send(embed=embed)
+            await ctx.send(await self.config.sessions.all())
+
 
     @session.command(name="set",usage="<oldname,sessionid>")
     async def set_session_id(self,ctx,*,str):
