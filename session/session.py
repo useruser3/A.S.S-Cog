@@ -145,12 +145,12 @@ class Session:
     async def set_session_name(self,ctx,*,str):
         """Type enter the name of the session that you want to change the name for followed by a comma and your new name for example (+session setname main session,awsome event session) make sure there is no space after the comma"""
         stype,text = str.split(",")
-            await ctx.send(await self.config.sessions.session1.name())
-            await ctx.send(await self.config.sessions.session2.name())
-            await ctx.send(await self.config.sessions.session3.name())
-            await ctx.send(await self.config.sessions.session4.name())
-            await ctx.send(await self.config.sessions.session5.name())
-            await ctx.send(await self.config.sessions.session6.name())
+        await ctx.send(await self.config.sessions.session1.name())
+        await ctx.send(await self.config.sessions.session2.name())
+        await ctx.send(await self.config.sessions.session3.name())
+        await ctx.send(await self.config.sessions.session4.name())
+        await ctx.send(await self.config.sessions.session5.name())
+        await ctx.send(await self.config.sessions.session6.name())
         if stype == await self.config.sessions.session1.name() or stype == await self.config.sessions.session1.defaultname():
             await ctx.send("```" + "The session Name for " + stype + " is now:" + " " + text + "```")
             await self.config.sessions.session1.name.set(text)
