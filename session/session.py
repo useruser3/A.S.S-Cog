@@ -28,7 +28,7 @@ async def get_names_list(self):
         temp=[]
         namelist=[]
         for session, session_data in session_dict.items():
-            if str(session_data['name']) != 'none':
+            if session_data['name'] != 'none':
                 temp = [session_data['name']]
                 namelist.append(temp)
         finaltext = replaceMultiple(str(namelist),['[',']',"'"], "")
@@ -166,3 +166,10 @@ class Session:
         else:
             emessage = await get_names_list(self)
             await ctx.send("Thats not a valid session. \n the current sessions are: " + emessage)
+            await ctx.send(await self.config.sessions.session1.name())
+            await ctx.send(await self.config.sessions.session2.name())
+            await ctx.send(await self.config.sessions.session3.name())
+            await ctx.send(await self.config.sessions.session4.name())
+            await ctx.send(await self.config.sessions.session5.name())
+            await ctx.send(await self.config.sessions.session6.name())
+
