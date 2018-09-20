@@ -141,7 +141,7 @@ class Session:
             emessage = await get_names_list(self)
             await ctx.send("Thats not a valid session. \n the current sessions are: " + emessage)
 
-    @session.command(name="setname")
+    @session.command(name="setname",usage="<oldname,newname>")
     async def set_session_name(self,ctx,*,str):
         """Type enter the name of the session that you want to change the name for followed by a comma and your new name for example (+session setname main session,awsome event session) make sure there is no space after the comma"""
         stype,text = str.split(",")
