@@ -13,6 +13,28 @@ def is_channel_not(channel_id):
                  return ctx.channel.id != channel_id
             return commands.check(predicate)
             return ctx.send("error")
+def replaceMultiple(mainString, toBeReplaces, newString):
+    # Iterate over the strings to be replaced
+    for elem in toBeReplaces :
+        # Check if string is in the main string
+        if elem in mainString :
+            # Replace the string
+            mainString = mainString.replace(elem, newString)
+    
+    return  mainString
+
+async def get_names_list(self):
+    async with self.config.sessions() as session_dict:
+        temp=[]
+        namelist=[]
+        for session, session_data in session_dict.items():
+            if session_data['name'] != 'none':
+                temp = [session_data['name']]
+                namelist.append(temp)
+        finaltext = replaceMultiple(str(namelist),['[',']',"'"], "")
+        return str(finaltext)
+
+
 
 
 class Session:
@@ -75,7 +97,7 @@ class Session:
     @is_channel_not(455080960455868417)
     @commands.group(autohelp=False)
     async def session(self,ctx):        
-        """type ```session``` followed by team to see the current session. leave team blank to see a general session"""
+        """lists all active sessions"""
         if ctx.invoked_subcommand is None:
             """lists all active sessions"""
             embed=discord.Embed(title='Session List')
@@ -93,10 +115,9 @@ class Session:
                 embed.add_field(name=await self.config.sessions.session6.name(), value=await self.config.sessions.session6.id(), inline=False)
             await ctx.send(embed=embed)
 
-    @session.command(name="set")
-    @checks.mod_or_permissions()
+    @session.command(name="set",usage="<oldname,sessionid>")
     async def set_session_id(self,ctx,*,str):
-        """Type set and the team you want to update followed by the new session ID (stype is the name of the team colour and text is the session ID)"""
+        """Type enter the name of the session that you want to change the ID for followed by a comma and your new ID for example (+session set main session,g34g2dssfS) make sure there is no space after the comma"""
         stype,text = str.split(",")
         if stype == await self.config.sessions.session1.name() or stype == await self.config.sessions.session1.defaultname():
             await ctx.send("```" + "The session ID for " + stype + " is now:" + " " + text + "```")
@@ -117,12 +138,12 @@ class Session:
             await ctx.send("```" + "The session ID for " + stype + " is now:" + " " + text + "```")
             await self.config.sessions.session6.id.set(text)
         else:
-            await ctx.send("invalid team")
+            emessage = await get_names_list(self)
+            await ctx.send("Thats not a valid session. \n the current sessions are: " + emessage)
 
     @session.command(name="setname")
-    @checks.mod_or_permissions()
     async def set_session_name(self,ctx,*,str):
-        """Type set and the team you want to update followed by the new session ID (stype is the name of the team colour and text is the session ID)"""
+        """Type enter the name of the session that you want to change the name for followed by a comma and your new name for example (+session setname main session,awsome event session) make sure there is no space after the comma"""
         stype,text = str.split(",")
         if stype == await self.config.sessions.session1.name() or stype == await self.config.sessions.session1.defaultname():
             await ctx.send("```" + "The session Name for " + stype + " is now:" + " " + text + "```")
@@ -143,4 +164,5 @@ class Session:
             await ctx.send("```" + "The session Name for " + stype + " is now:" + " " + text + "```")
             await self.config.sessions.session6.name.set(text)
         else:
-            await ctx.send("invalid team")
+            emessage = await get_names_list(self)
+            await ctx.send("Thats not a valid session. \n the current sessions are: " + emessage)
