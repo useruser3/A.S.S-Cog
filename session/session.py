@@ -73,7 +73,8 @@ class Session:
                     "name": False,
                     "id": "noneeeee"
                 }
-            }
+            },
+            "wordstofilter":[]
         }
 
         default_user = {
@@ -114,6 +115,7 @@ class Session:
             if ctx.channel.id == acechannel and await self.config.sessions.session6.id() != "none":
                 embed.add_field(name=await self.config.sessions.session6.name(), value=await self.config.sessions.session6.id(), inline=False)
             await ctx.send(embed=embed)
+            await ctx.send(await self.config.sessions.all())
 
     @session.command(name="set",usage="<oldname,sessionid>")
     async def set_session_id(self,ctx,*,str):
@@ -166,3 +168,4 @@ class Session:
         else:
             emessage = await get_names_list(self)
             await ctx.send("Thats not a valid session. \n the current sessions are: " + emessage)
+
