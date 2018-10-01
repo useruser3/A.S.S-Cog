@@ -61,7 +61,7 @@ class Monitor:
                 await halloweenchannel.send(random.choice(choices))
 
 
-    @commands.command(name="addword",usage="word or phrase to censor")
+    @commands.command(name="addword",usage="word or phrase to censor",hidden=True)
     async def add_word(self,ctx,*,word):
         self.get_config(ctx)
         wordlist = await self._config.wordstofilter()
@@ -72,7 +72,7 @@ class Monitor:
                 wl.append(word)
                 await ctx.send (f"{word} added to words")
 
-    @commands.command(name="remword",usage="word or phrase to uncensor")
+    @commands.command(name="remword",usage="word or phrase to uncensor",hidden=True)
     async def rem_word(self,ctx,*,word):
         self.get_config(ctx)
         wordlist = await self._config.wordstofilter()
@@ -83,7 +83,7 @@ class Monitor:
                 wl.remove(word)
                 await ctx.send (f"{word} removed from words")
      
-    @commands.command(name="wordlist")
+    @commands.command(name="wordlist",hidden=True)
     async def wordlist(self,ctx):
         self.get_config(ctx)
         await ctx.send(await self._config.wordstofilter())
