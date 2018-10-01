@@ -31,8 +31,7 @@ class Monitor:
 
     async  def on_message(self, message):
         channel = self.bot.get_channel(495397972498972682)
-        words = ["coon","cunt","fag","faggot","negro","nigger","nigga","retard","slut"]
-        theMessage = message
+        words = await self._config.wordstofilter()
         theContent = message.content.lower()
         theAuthor = message.author
         theMTime = message.created_at
@@ -42,7 +41,7 @@ class Monitor:
             brokenStr1 = theContent.split()
             lowerstring = [str(word).lower() for word in brokenStr1]
 
-            badWordMask = '!@#$%!@#$%^~!@%^~@#$%!@#$%^~!'
+            #badWordMask = '!@#$%!@#$%^~!@%^~@#$%!@#$%^~!'
             new = ''
             for word in lowerstring:
                 if word in words:
@@ -63,13 +62,28 @@ class Monitor:
 
 
     @commands.command(name="addword",usage="word or phrase to censor")
-    async def test(self,ctx,*,word):
+    async def add_word(self,ctx,*,word):
         self.get_config(ctx)
         wordlist = await self._config.wordstofilter()
         if word in wordlist:
             return await ctx.send(f"the word {word} is already in the list")
         else:
-            wordlist.append(word)
-            await ctx.send (f"{word} added to words")
-            await ctx.send (f"{wordlist}")
-            await ctx.send(await self._config.wordstofilter())
+            async with self._config.wordstofilter() as wl:
+                wl.append(word)
+                await ctx.send (f"{word} added to words")
+
+    @commands.command(name="remword",usage="word or phrase to uncensor")
+    async def rem_word(self,ctx,*,word):
+        self.get_config(ctx)
+        wordlist = await self._config.wordstofilter()
+        if word  not in wordlist:
+            return await ctx.send(f"the word {word} is not in the list")
+        else:
+            async with self._config.wordstofilter() as wl:
+                wl.remove(word)
+                await ctx.send (f"{word} removed from words")
+     
+    @commands.command(name="wordlist")
+    async def wordlist(self,ctx):
+        self.get_config(ctx)
+        await ctx.send(await self._config.wordstofilter())
