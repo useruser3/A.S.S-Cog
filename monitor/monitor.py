@@ -30,7 +30,7 @@ class Monitor:
 
     async  def on_message(self, message):
         channel = self.bot.get_channel(495397972498972682)
-        words = ["blah","bloop","rape","anal","anus","arse","ass","bastard","bitch","ass fuck","ass hole","assfucker","asshole","asshole","black cock","bloody hell","boong","cock","cockfucker","cocksuck","cocksucker","coon","coonnass","crap","cunt","cyberfuck","damn","darn","dick","dirty","douche","dummy","erect","erection","erotic","escort","fag","faggot","fuck","Fuck off","fuck you","fuckass","fuckhole","god damn","gook","hard core","hardcore","homoerotic","hore","lesbian","lesbians","mother fucker","motherfuck","motherfucker","negro","nigger","orgasim","orgasm","penis","penisfucker","piss","piss off","porn","porno","pornography","pussy","retard","sadist","sex","sexy","shit","slut","son of a bitch","suck","tits","viagra","whore","xxx"]
+        words = ["coon","cunt","fag","faggot","negro","nigger","retard","slut"]
         theMessage = message
         theContent = message.content.lower()
         theAuthor = message.author
@@ -42,7 +42,7 @@ class Monitor:
                 await channel.send(f"{theAuthor.display_name} said: **{theContent}** at **{theMTime}** in <#{theChannel}> {theJump}")
             #auto responses
             reactchannel = self.bot.get_channel(theChannel)
-            if "night" in theContent:
+            if "goodnight" in theContent:
                 choices = [f"goodnight {theAuthor.display_name}",f"dont let the bed bugs bite..... you :fork_and_knife: "]
                 await reactchannel.send(random.choice(choices))
             #halloween reacts
@@ -53,5 +53,3 @@ class Monitor:
             elif "ghost" in theContent:
                 choices = [":ghost: Ooooooooooo spooky","mwhahahahahahahaha"]
                 await halloweenchannel.send(random.choice(choices))
-
-
