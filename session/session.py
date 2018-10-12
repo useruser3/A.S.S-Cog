@@ -36,8 +36,9 @@ async def get_names_list(self):
 
 
 
+BaseCog = getattr(commands, "Cog", object)
 
-class Session:
+class Session(BaseCog):
     def __init__(self):
         #start config section
         self.config = Config.get_conf(self, identifier=1234567890)

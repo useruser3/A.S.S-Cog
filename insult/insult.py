@@ -4,8 +4,9 @@ from random import choice
 import os
 from .insults import insults
 
+BaseCog = getattr(commands, "Cog", object)
 
-class Insult:
+class Insult(BaseCog):
 
     """Airenkun's Insult Cog"""
     def __init__(self, bot):

@@ -14,8 +14,9 @@ def is_channel_not(channel_id):
             return commands.check(predicate)
             return ctx.send("error")
 
+BaseCog = getattr(commands, "Cog", object)
 
-class Hunter2:
+class Hunter2(BaseCog):
     def __init__(self):
         #start config section
         self._config = None

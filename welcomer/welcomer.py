@@ -14,8 +14,9 @@ def is_channel_not(channel_id):
             return commands.check(predicate)
             return ctx.send("error")
 
+BaseCog = getattr(commands, "Cog", object)
 
-class Welcomer:
+class Welcomer(BaseCog):
     def __init__(self, bot):
         #start config section
         self.bot = bot
