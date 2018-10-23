@@ -189,16 +189,32 @@ class Welcomer(BaseCog):
 
     async def on_member_join(self, member):
         server = member.guild
-        channel = self.bot.get_channel(481390232521015296)
-        role = discord.utils.get(server.roles, id=455061046390947840)
-        newmember = member
-        await channel.send(f"Welcome {member.mention} to {server.name}. Please read pinned message and head over to <#481295578530185226> for help getting your roles and access to channels. Thank you enjoy.")
-        await member.add_roles(role)
-        await gameselection(self,newmember,channel)
+        #if apex
+        if server.id == 353647505646288896:
+            channel = self.bot.get_channel(481390232521015296)
+            role = discord.utils.get(server.roles, id=455061046390947840)
+            newmember = member
+            await channel.send(f"Welcome {member.mention} to {server.name}. Please read pinned message and head over to <#481295578530185226> for help getting your roles and access to channels. Thank you enjoy.")
+            await member.add_roles(role)
+            await gameselection(self,newmember,channel)
+        #if pebbles server
+        elif server.id == 503614670070874142:
+            channel = self.bot.get_channel(503822008048549888)
+            print("oh hai")
+            await channel.send(f"Hey {member.mention}. Welcome to this tiny pretty place. Pls read and understand the rules.\nYou can pick your own name color in #announcements with tapping on a reaction.\n1.  Don´t be an asshole\n2. Bullshitting is definitly allowed everywhere, as long as no gets insulted by it\n3. No Lewd Stuff except in the <#503845776938631179>\n4. <@&503841766907183106> sees everything (or lurk after it in logs)\n5. Most important part: just don't act like a dumbass, the mighty Ban Hammer will hit you immedeatly\n\nAhoi plebbles")
+       
+        
 
     async  def on_member_remove(self, member):
-        channel = self.bot.get_channel(481390232521015296)
-        await channel.send(f"Sorry to see you go {member}")
+        server = member.guild
+        #if apex
+        if server.id == 353647505646288896:
+            channel = self.bot.get_channel(481390232521015296)
+            await channel.send(f"Sorry to see you go {member}")
+        #if pebbles server
+        elif server.id == 503614670070874142:
+            channel = self.bot.get_channel(503822008048549888)
+            await channel.send(f"{member} fucked off")
 
     
 #welcomer commands
@@ -215,4 +231,10 @@ class Welcomer(BaseCog):
         """
         some description
         """
-        await gameselection(self,member = ctx.message.author, channel = ctx.channel)
+        server = ctx.author.guild
+        print(server.id)
+        if server.id == 353647505646288896:
+            print(1)
+        elif server.id == 503614670070874142:
+            print(2)
+        #await gameselection(self,member = ctx.message.author, channel = ctx.channel)
