@@ -31,6 +31,7 @@ class Monitor(BaseCog):
         return self._config
 
     async  def on_message(self, message):
+        server = message.guild
         channel = self.bot.get_channel(495397972498972682)
         words = await self._config.wordstofilter()
         theContent = message.content.lower()
@@ -45,7 +46,7 @@ class Monitor(BaseCog):
             #badWordMask = '!@#$%!@#$%^~!@%^~@#$%!@#$%^~!'
             new = ''
             for word in lowerstring:
-                if word in words:
+                if word in words and server.id == 353647505646288896:
                     await channel.send(f"{theAuthor.display_name} said: **{theContent}** at **{theMTime}** in <#{theChannel}> the offending word was **{word}** {theJump}")
             #auto responses
             reactchannel = self.bot.get_channel(theChannel)
