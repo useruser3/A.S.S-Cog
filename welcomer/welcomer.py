@@ -201,7 +201,7 @@ class Welcomer(BaseCog):
         elif server.id == 503614670070874142:
             channel = self.bot.get_channel(503822008048549888)
             print("oh hai")
-            await channel.send(f"Hey {member.mention}. Welcome to this tiny pretty place. Pls read and understand the rules.\nYou can pick your own name color in #announcements with tapping on a reaction.\n1.  Don´t be an asshole\n2. Bullshitting is definitly allowed everywhere, as long as no gets insulted by it\n3. No Lewd Stuff except in the <#503845776938631179>\n4. <@&503841766907183106> sees everything (or lurk after it in logs)\n5. Most important part: just don't act like a dumbass, the mighty Ban Hammer will hit you immedeatly\n\nAhoi plebbles")
+            await channel.send(f"Hey {member.mention}. Welcome to this tiny pretty place. Pls read and understand the rules.\nYou can pick your own name color in <#503857657258442752> with tapping on a reaction.\n1.  Don´t be an asshole\n2. Bullshitting is definitly allowed everywhere, as long as no gets insulted by it\n3. No Lewd Stuff except in the <#503845776938631179>\n4. <@&503841766907183106> sees everything (or lurk after it in logs)\n5. Most important part: just don't act like a dumbass, the mighty Ban Hammer will hit you immedeatly\n\nAhoi plebbles")
        
         
 
